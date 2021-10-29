@@ -41,4 +41,4 @@ root                    (project root folder)
 ## Authors
 ---
 * # TODO: Add names and emails here
-Ryan Brower - rbrower28@byui.edu
+* Ryan Brower - rbrower28@byui.edu
