@@ -47,7 +47,8 @@ class Words:
             self (Words): an instance of Words.
             text (String): will be checked.
 
-        Returns: Nothing
+        Returns: (Int) - the number of words that were
+            matched and replaced.
         """
 
 
