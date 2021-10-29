@@ -38,6 +38,22 @@ class Words:
         return self._words
 
 
+    def move_words(self):
+        """Moves each word (instance of Actor) using the
+        inherited method move_next()
+        
+        Args:
+            self (Words): an instance of Words.
+
+        Returns: Nothing
+        """
+
+        for word in self._words:
+            word.move_next()
+
+
+
+
     def check_words(self, buffer):
         """Checks if any of the words from self._words
         are contained in the string of text.
