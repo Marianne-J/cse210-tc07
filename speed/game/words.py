@@ -38,7 +38,7 @@ class Words:
         return self._words
 
 
-    def check_words(self, text):
+    def check_words(self, buffer):
         """Checks if any of the words from self._words
         are contained in the string of text.
         If found in text, words are replaced with _replace_word()
@@ -50,6 +50,18 @@ class Words:
         Returns: (Int) - the number of words that were
             matched and replaced.
         """
+
+        matches = 0
+
+        for word in self._words:
+
+            word_name = word._text
+
+            if word_name in buffer:
+                self._replace_word(word_name)
+                matches += 1
+
+        return matches
 
 
     def _replace_word(self, word):
@@ -65,10 +77,19 @@ class Words:
         Returns: Nothing
         """
 
+        index = 0
+
+        for i in self._words:
+
+            if (i._text == word):
+                self._words[index] = self._add_word()
+
+            index += 1
+
 
     def _add_word(self):
         """To be used in _prepare_words() and _replace_word().
-        Generates a new instance of actor and sets a random name,
+        Generates a new instance of actor with a random name,
         location, and velocity. 
         
         Args:
