@@ -1,6 +1,7 @@
 
 from game.actor import Actor
 from game.point import Point
+from game import constants
 
 class Buffer(Actor):
     """A line that displays text during the game. The responsibility of Buffer is to keep track of it's appearnce, the letters
@@ -20,11 +21,19 @@ class Buffer(Actor):
         Args:
             self (Buffer): an instance of Buffer.
         """
-        self._text = ""
-        self._position = Point(0, 0)
+        super().__init__()
+        self.set_position = Point(1, constants.MAX_Y - 1)
     
     def add_letter(self, letter):
-        pass
+        """Adds a letter to the buffer.
+        
+        Args:
+            self (Buffer): an instance of Buffer.
+            letter (string): the letter to be added.
+        """
+        current_buffer = self.get_text()
+        add_letter = current_buffer + letter
+        self.set_text(add_letter)
 
     def clear_buffer(self):
         pass
