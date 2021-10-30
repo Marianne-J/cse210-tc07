@@ -22,7 +22,7 @@ class Buffer(Actor):
             self (Buffer): an instance of Buffer.
         """
         super().__init__()
-        self.set_position = Point(1, constants.MAX_Y - 1)
+        self.set_position(Point(1, constants.MAX_Y - 1))
     
     def add_letter(self, letter):
         """Adds a letter to the buffer.
