@@ -1,7 +1,7 @@
 import os
 
 MAX_X = 60
-MAX_Y = 20
+MAX_Y = 15
 FRAME_LENGTH = 0.08
 STARTING_WORDS = 5
 PATH = os.path.dirname(os.path.abspath(__file__))

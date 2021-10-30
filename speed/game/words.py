@@ -25,6 +25,7 @@ class Words:
         """
         
         self._words = []
+        self._prepare_words()
 
 
     def get_words(self):
@@ -72,7 +73,7 @@ class Words:
 
         for word in self._words:
 
-            word_name = word._text
+            word_name = word.get_text()
 
             if word_name in buffer:
                 self._replace_word(word_name)
@@ -99,7 +100,9 @@ class Words:
         for i in self._words:
 
             if (i._text == word):
-                self._words[index] = self._add_word()
+                position = Point(1, random.randint(0,constants.MAX_Y - 2))
+                velocity = Point(random.randint(1, 3), 0)
+                self._words[index] = self._add_word(position, velocity)
 
             index += 1
 
@@ -127,6 +130,6 @@ class Words:
             self (Words): an instance of Words.
         """
         for n in range(constants.STARTING_WORDS):
-            position = Point(random.randint(0,constants.MAX_X - 1), random.randint(0,constants.MAX_Y - 1))
-            velocity = Point(random.randint(0,10), random.randint(0,10))
+            position = Point(1, random.randint(1,constants.MAX_Y - 2))
+            velocity = Point(random.randint(1, 3), 0)
             self._add_word(position, velocity)
