@@ -36,7 +36,12 @@ class Buffer(Actor):
         self.set_text(add_letter)
 
     def clear_buffer(self):
-        pass
+        """Clears the buffer.
+        
+        Args:
+            self (Buffer): an instance of Buffer.
+        """
+        self.set_text("")
 
     def get_buffer(self):
         """Returns the current buffer.
