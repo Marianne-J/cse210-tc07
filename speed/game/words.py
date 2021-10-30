@@ -1,5 +1,6 @@
 from game import constants
 from game.actor import Actor
+from game.point import Point
 import random
 
 
@@ -103,7 +104,7 @@ class Words:
             index += 1
 
 
-    def _add_word(self):
+    def _add_word(self, position, velocity):
         """To be used in _prepare_words() and _replace_word().
         Generates a new instance of actor with a random name,
         location, and velocity. 
@@ -111,6 +112,11 @@ class Words:
         Args:
             self (Words): an instance of Words.
         """
+        word = Actor()
+        word.set_text(random.choice(open(constants.PATH + "/words.txt").read().splitlines()))
+        word.set_position(position)
+        word.set_velocity(velocity)
+        self._words.append(word)
 
 
     def _prepare_words(self):
@@ -120,3 +126,7 @@ class Words:
         Args:
             self (Words): an instance of Words.
         """
+        for n in range(constants.STARTING_WORDS):
+            position = Point(random.randint(0,constants.MAX_X - 1), random.randint(0,constants.MAX_Y - 1))
+            velocity = Point(random.randint(0,10), random.randint(0,10))
+            self._add_word(position, velocity)
