@@ -76,13 +76,13 @@ class Words:
             word_name = word.get_text()
 
             if word_name in buffer:
-                self._replace_word(word_name)
+                self.replace_word(word_name)
                 matches += 1
 
         return matches
 
 
-    def _replace_word(self, word):
+    def replace_word(self, word):
         """To be used in check_words().
         Compares the argument word with the words in self._words
         and replaces it on the array using _add_word().
@@ -96,21 +96,28 @@ class Words:
         """
 
         index = 0
+        removed_count = 0
 
         for i in self._words:
 
-            if (i._text == word):
-                position = Point(1, random.randint(0,constants.MAX_Y - 2))
-                velocity = Point(random.randint(1, 3), 0)
-                self._words[index] = self._add_word(position, velocity)
+            if (i.get_text() == word):
+                self._words.pop(index)
+
+                position = Point(1, random.randint(0,constants.MAX_Y - 3))
+                velocity = Point(1, 0)
+                self._add_word(position, velocity)
+
+                break
 
             index += 1
+
+            
 
 
     def _add_word(self, position, velocity):
         """To be used in _prepare_words() and _replace_word().
         Generates a new instance of actor with a random name,
-        location, and velocity. 
+        location, and velocity and appends it to the list.
         
         Args:
             self (Words): an instance of Words.
@@ -130,6 +137,6 @@ class Words:
             self (Words): an instance of Words.
         """
         for n in range(constants.STARTING_WORDS):
-            position = Point(1, random.randint(1,constants.MAX_Y - 2))
-            velocity = Point(random.randint(1, 3), 0)
+            position = Point(1, random.randint(1,constants.MAX_Y - 3))
+            velocity = Point(1, 0)
             self._add_word(position, velocity)

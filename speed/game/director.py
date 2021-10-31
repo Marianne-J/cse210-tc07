@@ -12,12 +12,12 @@ class Director:
         Controller
 
     Attributes:
-        food (Food): The snake's target.
-        input_service (InputService): The input mechanism.
-        keep_playing (boolean): Whether or not the game can continue.
-        output_service (OutputService): The output mechanism.
-        score (Score): The current score.
-        snake (Snake): The player or snake.
+        _input_service (InputService): The input mechanism.
+        _keep_playing (boolean): Whether or not the game can continue.
+        _output_service (OutputService): The output mechanism.
+        _score (Score): The current score.
+        _buffer (Buffer): Stores the player's input
+        _words (Words): A controller / storage for the words traveling across the screen
     """
 
     def __init__(self, input_service, output_service):
@@ -47,7 +47,7 @@ class Director:
 
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
-        that means getting the desired direction and moving the snake.
+        that means getting the inputted character from the keyboard and resolving that input.
 
         Args:
             self (Director): An instance of Director.
@@ -61,7 +61,8 @@ class Director:
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
-        this case, that means checking for a collision and updating the score.
+        this case, that means comparing the buffer to the words, adding points, and 
+        checking if any words have reached the edge of the screen.
 
         Args:
             self (Director): An instance of Director.
@@ -72,11 +73,13 @@ class Director:
 
         self._words.move_words()
 
+        self._expire_words()
+
+
         
     def _do_outputs(self):
-        """Outputs the important game information for each round of play. In 
-        this case, that means checking if there are stones left and declaring 
-        the winner.
+        """Outputs the important game information for each round of play. In this case,
+        that means telling the output service to draw the actors and refreshing the screen.
 
         Args:
             self (Director): An instance of Director.
@@ -86,4 +89,18 @@ class Director:
         self._output_service.draw_actors(self._words.get_words())
         self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()
+
+    def _expire_words(self):
+        """Grabs the list of words and checks their x position. If they've reached the edge of the screen, 
+        replaces them with new words.
+
+        Args:
+            self (Director): An instance of Director.
+        """
+        current_words = self._words.get_words()
+
+        for x in current_words:
+            if (x.get_position().get_x() >= constants.MAX_X - 1):
+                self._words.replace_word(x.get_text())
+
         
